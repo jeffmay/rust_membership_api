@@ -1,0 +1,8 @@
+[package]
+name = "rust_membership_api"
+version = "0.1.0"
+authors = ["Jeff May <jeff.n.may@gmail.com>"]
+
+[dependencies]
+rocket = "0.3.6"
+rocket_codegen = "0.3.6"
