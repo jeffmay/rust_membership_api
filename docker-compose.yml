@@ -2,13 +2,14 @@ version: '3'
 services:
   db:
     image: "postgres:9.6"
+    network_mode: "host"
     ports:
       - "5432:5432"
-    volumes:
-      - ./db/db.sql:/docker-entrypoint-initdb.d/01_db.sql
-      - ./db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
+        #    volumes:
+        #      - ./db/db.sql:/docker-entrypoint-initdb.d/01_db.sql
+        #      - ./db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
     environment:
-      POSTGRES_DB: rust
+      POSTGRES_DB: membership
       POSTGRES_PASSWORD: docker
       POSTGRES_USER: docker
   web:
