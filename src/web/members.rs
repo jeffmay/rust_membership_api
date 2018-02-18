@@ -1,8 +1,6 @@
 use db::DB;
-use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use models::User;
-use r2d2::{Pool, PooledConnection};
 use rocket::{Route, State};
 use rocket_contrib::Json;
 use std::sync::Arc;

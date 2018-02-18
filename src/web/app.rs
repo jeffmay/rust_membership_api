@@ -1,5 +1,4 @@
-use config::{DATABASE_URL, VERSION};
-use diesel;
+use config::{AppConfig, VERSION};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use r2d2::Pool;
@@ -8,9 +7,9 @@ use rocket::Rocket;
 use std;
 use web::members;
 
-pub fn mount_app(rocket: Rocket) -> Rocket {
+pub fn mount_app(rocket: Rocket, config: AppConfig) -> Rocket {
     // TODO: Move this to some kind of application builder
-    let manager = ConnectionManager::<PgConnection>::new(DATABASE_URL);
+    let manager = ConnectionManager::<PgConnection>::new(config.db.url);
     let pool = Pool::new(manager).expect("Failed to create pool.");
     rocket
         .mount("/", routes![version])
