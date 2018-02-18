@@ -24,6 +24,9 @@ use rocket::outcome::Outcome::*;
 
 use std::ops::Deref;
 
+pub mod models;
+pub mod schema;
+
 pub const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 pub mod web;

@@ -7,9 +7,9 @@ use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use std::sync::Arc;
 use super::super::DbConn;
+use super::super::models;
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Member;
+
 
 #[get("/hello/<name>/<age>")]
 pub fn hello(name: String, age: u8) -> String {
@@ -18,7 +18,7 @@ pub fn hello(name: String, age: u8) -> String {
 
 
 #[get("/<id>")]
-pub fn find_by_id(db: DbConn, id: u32) -> Option<Json<Member>> {
+pub fn find_by_id(db: DbConn, id: u32) -> Option<Json<models::Member>> {
 
     None
 }
