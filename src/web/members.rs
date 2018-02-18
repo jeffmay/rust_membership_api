@@ -33,5 +33,5 @@ pub fn create(db: DB, input: Json<User>) -> Result<Accepted<String>, String> {
 }
 
 pub fn routes() -> Vec<Route> {
-    routes![hello, find_by_id]
+    routes![hello, find_by_id, create]
 }
