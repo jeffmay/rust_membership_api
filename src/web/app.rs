@@ -13,7 +13,7 @@ pub fn mount_app(rocket: Rocket, config: AppConfig) -> Rocket {
     let pool = Pool::new(manager).expect("Failed to create pool.");
     rocket
         .mount("/", routes![version])
-        .mount("/members", members::routes())
+        .mount("/member", members::routes())
         .manage(pool)
 }
 
