@@ -1,5 +1,5 @@
 table! {
-    members (id) {
+    users (id) {
         id -> Int4,
         email -> Varchar,
     }

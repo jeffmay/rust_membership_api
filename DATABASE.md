@@ -25,5 +25,16 @@ diesel migration run  # apply migrations
 diesel migration redo  # test down/up
 ```
 
+## View what Diesel thinks your schema is
 
+This command connects to the DB and prints Rust macro code
 
+```
+diesel print-schema
+```
+
+Add it to **src/schema.rs**
+
+```
+diesel print-schema > src/schema.rs
+```
