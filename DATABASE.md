@@ -19,10 +19,10 @@ This makes blank up/down scripts. Write `CREATE TABLE` stuff in **up.sql** and
 We haven't needed to actually connect to the db yet, but now we're ready.
 
 ```sh
-docker-compose up -d db  # start db with network_mode: db is on localhost:5432
+docker-compose up -d db  # start db on localhost:5432
 source env.sh  # get our env
-diesel migrations run  # apply migrations
-diesel migrations redo  # test down/up
+diesel migration run  # apply migrations
+diesel migration redo  # test down/up
 ```
 
 
