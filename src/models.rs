@@ -1,7 +1,11 @@
+use super::schema::users;
 
-#[derive(Queryable, Serialize, Deserialize, Debug)]
+use diesel::sql_types::{Int4};
+
+#[derive(Queryable, Serialize, Deserialize, Insertable, Debug)]
+#[table_name="users"]
 pub struct User {
-    id: u32,
-    email: String,
-    name: String,
+    id: i32,
+    email: String
 }
+
