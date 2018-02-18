@@ -1,20 +1,17 @@
-
-use std;
+use config::{DATABASE_URL, VERSION};
 use diesel;
-use diesel::prelude::*;
 use diesel::pg::PgConnection;
-
-use r2d2;
-use r2d2_diesel;
+use diesel::prelude::*;
+use r2d2::Pool;
+use r2d2_diesel::ConnectionManager;
 use rocket::Rocket;
-use super::members;
-use VERSION;
+use std;
+use web::members;
 
 pub fn mount_app(rocket: Rocket) -> Rocket {
-    let env_var = std::env::var("DATABASE_URL").unwrap();
-    let manager = r2d2_diesel::ConnectionManager::<PgConnection>::new(env_var);
-    let pool = r2d2::Pool::new(manager).expect("Failed to create pool.");
-
+    // TODO: Move this to some kind of application builder
+    let manager = ConnectionManager::<PgConnection>::new(DATABASE_URL);
+    let pool = Pool::new(manager).expect("Failed to create pool.");
     rocket
         .mount("/", routes![version])
         .mount("/members", members::routes())
