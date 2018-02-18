@@ -2,7 +2,6 @@ version: '3'
 services:
   db:
     image: "postgres:9.6"
-    network_mode: "host"
     ports:
       - "5432:5432"
         #    volumes:
@@ -16,6 +15,6 @@ services:
     #command: sleep 999   # don't know why, but this is in the example?
     image: jeffmay/rust_membership_api
     ports:
-     - "8000:8000"
+      - "8000:8000"
     links:
-        - "db:db"
+      - "db:db"
