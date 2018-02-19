@@ -11,3 +11,7 @@ dev: load
 # Load all infrastructure (databases, caches, etc)
 load:
 	docker-compose up -d db
+
+migrate:
+	dotenv-shell diesel migration run
+
