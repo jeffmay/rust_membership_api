@@ -4,7 +4,7 @@
 
 ### Nightly Rust
 
-Use `rustup`
+Use `rustup` to install Rust language dependencies. Install it [here](https://www.rustup.rs/) 
 
 ```bash
 rustup default nightly
@@ -38,7 +38,7 @@ we need the libraries for compiling rust dependencies.
 
 **Mac OS X**
 
-* I recommend downloading and installing [Postgres.app GUI](https://postgresapp.com)
+* I recommend downloading and installing [PSequel](http://www.psequel.com/) for a GUI
 * If you don't want the GUI, you can just [download the Postgres Server](https://www.postgresql.org/)
 
 **Arch Linux**
@@ -95,12 +95,16 @@ running the command in a way that will work with the current version of the code
 
 [See [Diesel's Getting Started Guide](http://diesel.rs/guides/getting-started/) for more info]
 
-We use diesel to run migrations.
+We use diesel to run migrations. The easiest way is to run:
 
 ```bash
-dotenv-shell diesel migration run  # apply migrations
-dotenv-shell diesel migration redo  # test down/up
+make migrate
+# This is basically just an alias for
+# dotenv-shell diesel migration run
 ```
+
+If you want to run more custom `diesel-cli` commands, you'll need to remember to run the commands 
+with `dotenv-shell` to get the required environment variables into diesel so it can connect.
 
 ### Synchronizing the schema with the code
 
