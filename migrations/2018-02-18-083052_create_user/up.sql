@@ -2,5 +2,5 @@
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL
+    email_address VARCHAR NOT NULL
 );

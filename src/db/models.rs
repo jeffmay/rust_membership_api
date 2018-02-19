@@ -4,5 +4,5 @@ use db::schema::users;
 #[table_name="users"]
 pub struct User {
     id: i32,
-    email: String
+    email_address: String
 }
