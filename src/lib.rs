@@ -1,8 +1,16 @@
 #![feature(plugin, decl_macro)]
 #![plugin(rocket_codegen)]
 
+extern crate core;
+#[macro_use] extern crate diesel;
+extern crate r2d2;
+extern crate r2d2_diesel;
 extern crate rocket;
+extern crate rocket_contrib;
+extern crate serde;
+#[macro_use] extern crate serde_derive;
+extern crate serde_json;
 
-pub const VERSION: &'static str = env!("CARGO_PKG_VERSION");
-
+pub mod config;
+pub mod db;
 pub mod web;

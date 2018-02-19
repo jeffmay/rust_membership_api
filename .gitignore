@@ -1,5 +1,11 @@
 /target/
 **/*.rs.bk
 
+# Ignore mnt directory
+mnt/
+
+# Ignore dotenv
+.env
+
 # Ignore IntelliJ
 .idea

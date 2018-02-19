@@ -1,0 +1,10 @@
+version: '3'
+services:
+  api:
+    ports:
+      - "8000:8000"
+   # TODO: Figure out how to mount the database data directory as a volume to keep data between restarts
+#  db:
+#    volumes:
+#      - ./mnt/postgres/db.sql:/docker-entrypoint-initdb.d/01_db.sql
+#      - ./mnt/postgres/data.sql:/docker-entrypoint-initdb.d/02_data.sql
