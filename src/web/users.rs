@@ -40,6 +40,6 @@ pub fn find_by_id(db: DB, id: ID) -> ApiResult<Option<Json<User>>> {
 
 #[post("/", format = "application/json", data = "<input>")]
 pub fn create(db: DB, input: Json<NewUser>) -> ApiResult<Created<Json<User>>> {
-    rest::users::create(db.as_ref(), input.into_inner())
+    rest::users::create(db.as_ref(), &input.into_inner())
         .map(|user| Created(format!("/members/{}", user.id), Some(Json(user))))
 }

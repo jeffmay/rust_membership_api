@@ -10,6 +10,7 @@ use std::str;
 /// The standard ID type for the database
 pub type ID = i32;
 
+/// A user from the `users` table. Can either be a guest or a member.
 #[derive(Debug, Serialize, Insertable, Queryable)]
 #[table_name="users"]
 pub struct User {
@@ -22,7 +23,6 @@ pub struct User {
 }
 
 impl User {
-
     pub fn name(self) -> Option<String> {
         let full_name = format!(
             "{} {}",
