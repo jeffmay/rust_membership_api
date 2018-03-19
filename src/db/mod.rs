@@ -6,17 +6,35 @@ use rocket::http::Status;
 use rocket::Outcome;
 use rocket::request;
 use rocket::request::{FromRequest, Request, State};
+use core::borrow::Borrow;
 
 pub mod models;
 pub mod schema;
 
+/// The Postgres connection type
+pub type Connection = PgConnection;
+
+/// The connection manager.
+pub type ConnectionManager = r2d2_diesel::ConnectionManager<Connection>;
+
 /// A pool of database connections.
-pub type Pool = r2d2::Pool<r2d2_diesel::ConnectionManager<PgConnection>>;
+pub type Pool = r2d2::Pool<ConnectionManager>;
+
+/// Connection to the pool
+pub type PooledConnection = r2d2::PooledConnection<ConnectionManager>;
 
 /// A wrapper around an r2d2 pooled connection.
 /// Returns a connection request guard type.
 /// Called "DB" for short since it is used and passed along in every authenticated request.
-pub struct DB(pub r2d2::PooledConnection<r2d2_diesel::ConnectionManager<PgConnection>>);
+pub struct DB {
+    pub connection: PooledConnection,
+}
+
+impl DB {
+    fn new(connection: PooledConnection) -> Self {
+        DB { connection }
+    }
+}
 
 /// Attempts to retrieve a single connection from the managed database pool.
 /// If no pool is currently managed, fails with an `InternalServerError` status.
@@ -27,17 +45,14 @@ impl<'a, 'r> FromRequest<'a, 'r> for DB {
     fn from_request(request: &'a Request<'r>) -> request::Outcome<DB, ()> {
         let pool = request.guard::<State<Pool>>()?;
         match pool.get() {
-            Ok(conn) => Outcome::Success(DB(conn)),
-            Err(_) => Outcome::Failure((Status::ServiceUnavailable, ()))
+            Ok(conn) => Outcome::Success(DB::new(conn)),
+            Err(_) => Outcome::Failure((Status::ServiceUnavailable, ())),
         }
     }
 }
 
-/// For the convenience of using `&DB` as an `&PgConnection`.
-impl Deref for DB {
-    type Target = PgConnection;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
+impl AsRef<Connection> for DB {
+    fn as_ref(&self) -> &Connection {
+        &self.connection
     }
 }

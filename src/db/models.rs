@@ -1,20 +1,24 @@
-use diesel::*;
 use db::schema::*;
+use diesel::*;
 use diesel::deserialize::{self, FromSql};
+use diesel::insertable::Insertable;
 use diesel::pg::Pg;
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
 use std::str;
 
-#[derive(Debug, Deserialize, Serialize, Insertable, Queryable)]
+/// The standard ID type for the database
+pub type ID = i32;
+
+#[derive(Debug, Serialize, Insertable, Queryable)]
 #[table_name="users"]
 pub struct User {
-    id: i32,
-    email_address: Option<String>,
-    normalized_email: Option<String>,
-    first_name: Option<String>,
-    last_name: Option<String>,
-    biography: Option<String>,
+    pub id: ID,
+    pub email_address: Option<String>,
+    pub normalized_email: Option<String>,
+    pub first_name: Option<String>,
+    pub last_name: Option<String>,
+    pub biography: Option<String>,
 }
 
 impl User {
