@@ -1,11 +1,4 @@
 use db::schema::*;
-use diesel::*;
-use diesel::deserialize::{self, FromSql};
-use diesel::insertable::Insertable;
-use diesel::pg::Pg;
-use diesel::serialize::{self, IsNull, Output, ToSql};
-use std::io::Write;
-use std::str;
 
 /// The standard ID type for the database
 pub type ID = i32;
@@ -35,6 +28,21 @@ impl User {
             Some(full_name)
         }
     }
+}
+
+#[derive(Debug, Serialize, Insertable, Queryable)]
+#[table_name="roles"]
+pub struct Role {
+    pub id: ID,
+
+    /// The committee for which this role is limited.
+    /// None implies that the role is chapter-wide
+    pub committee_id: Option<ID>,
+
+    pub user_id: ID,
+
+    /// The name of the role. Must be unique per committee.
+    pub role: String,
 }
 
 pub enum ElectionStatus {

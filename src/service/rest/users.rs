@@ -1,14 +1,10 @@
-use db::{Connection, DB};
+use db::Connection;
 use db::models::{ID, User};
 use db::schema::*;
 use diesel;
 use diesel::prelude::*;
-use diesel::result::Error;
-use rocket::http::Status;
-use rocket::request::Request;
-use rocket::response::{Responder, Response};
 use service::rest::models::NewUser;
-use service::rest::result::{ApiError, ApiResult, IntoApiResult};
+use service::rest::result::*;
 
 /// Create the given [NewUser] and return the fully constructed [User].
 pub fn create(c: &Connection, guest: &NewUser) -> ApiResult<User> {

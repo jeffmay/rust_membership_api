@@ -3,7 +3,7 @@ use diesel::pg::PgConnection;
 use r2d2::Pool;
 use r2d2_diesel::ConnectionManager;
 use rocket::Rocket;
-use web::users;
+use web;
 
 pub fn mount_app(rocket: Rocket, config: AppConfig) -> Rocket {
     // TODO: Move this to some kind of application builder
@@ -12,8 +12,9 @@ pub fn mount_app(rocket: Rocket, config: AppConfig) -> Rocket {
     rocket
         .mount("/", routes![version])
         // The /members routes have moved to /users, but is here for backward compatibility
-        .mount("/members", users::routes())
-        .mount("/users", users::routes())
+        .mount("/members", web::users::routes())
+        .mount("/users", web::users::routes())
+        .mount("/roles", web::roles::routes())
         .manage(pool)
 }
 

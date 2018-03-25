@@ -1,9 +1,7 @@
-use diesel;
-use diesel::result::{Error as DieselError, QueryResult};
+use diesel::result::{Error as DieselError};
 use rocket::http::Status;
 use rocket::request::Request;
 use rocket::response::{Responder, Response};
-use rocket_contrib::Json;
 use serde::{Serialize, Serializer};
 use serde::ser::SerializeMap;
 use serde_json;
@@ -54,7 +52,7 @@ impl From<DieselError> for ApiError {
 /// Allows responding with an [ApiError].
 /// NOTE: This sets the response status to match the `http_status` field.
 impl<'r> Responder<'r> for ApiError {
-    fn respond_to(self, request: &Request) -> Result<Response<'r>, Status> {
+    fn respond_to(self, _request: &Request) -> Result<Response<'r>, Status> {
         Response::build()
             .status(Status::from_code(self.http_status)
                 .expect(&format!("Unknown HTTP status code {}", self.http_status))

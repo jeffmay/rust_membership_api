@@ -12,3 +12,6 @@ pub mod result;
 
 /// All user service functions
 pub mod users;
+
+/// All role service functions
+pub mod roles;
