@@ -1,21 +1,11 @@
 use db::DB;
 use db::models::{ID, User};
-use db::schema::users;
-use diesel;
-use diesel::prelude::*;
-use diesel::result::Error;
-use rocket::{Route, State};
-use rocket::http::Status;
-use rocket::request::Request;
-use rocket::response::Response;
-use rocket::response::Responder;
-use rocket::response::status::{Accepted, Created};
+use rocket::response::status::Created;
+use rocket::Route;
 use rocket_contrib::Json;
 use service::rest;
 use service::rest::models::NewUser;
 use service::rest::result::ApiResult;
-use std::sync::Arc;
-use std::borrow::Borrow;
 
 /// The list of all routes in this module.
 /// Be sure to add new routes to this list or they will not be registered in the router.

@@ -8,3 +8,6 @@ pub mod app;
 
 /// Endpoints related to users
 pub mod users;
+
+/// Endpoints related to roles
+pub mod roles;

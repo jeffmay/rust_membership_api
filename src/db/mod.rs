@@ -1,4 +1,3 @@
-use core::ops::Deref;
 use diesel::pg::PgConnection;
 use r2d2;
 use r2d2_diesel;
@@ -6,7 +5,6 @@ use rocket::http::Status;
 use rocket::Outcome;
 use rocket::request;
 use rocket::request::{FromRequest, Request, State};
-use core::borrow::Borrow;
 
 /// All database models
 /// NOTE: This may evolve into a directory if the models grow large enough
